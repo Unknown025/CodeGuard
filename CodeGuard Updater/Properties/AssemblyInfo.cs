@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CodeGuard")]
-[assembly: AssemblyDescription("A utility for compiling and checking Java files.")]
+[assembly: AssemblyTitle("CodeGuard Updater")]
+[assembly: AssemblyDescription("Updater for CodeGuard")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CodeGuard")]
+[assembly: AssemblyProduct("CodeGuard Updater")]
 [assembly: AssemblyCopyright("Copyright Sasha Petushkov ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("46e86a22-5ac0-4f4b-8ed7-1cf9e182c3c0")]
+[assembly: Guid("e7299b3e-6b10-4742-8040-c3b28233e979")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,0 +1,29 @@
+﻿<Custom:RibbonWindow    
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeGuard_WPF"
+        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="CodeGuard_WPF.MainWindow"
+        mc:Ignorable="d"
+        Title="CodeGuard" Height="450" Width="800">
+    <Custom:Ribbon HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="790">
+        <Custom:Ribbon.QuickAccessToolBar>
+            <Custom:RibbonQuickAccessToolBar>
+                <Custom:RibbonButton Label="Text">
+                    
+                </Custom:RibbonButton>
+            </Custom:RibbonQuickAccessToolBar>
+        </Custom:Ribbon.QuickAccessToolBar>
+        <Custom:Ribbon.ApplicationMenu>
+            <Custom:RibbonApplicationMenu KeyTip="F">
+                <Custom:RibbonApplicationMenuItem Header="Options" />
+                <Custom:RibbonApplicationMenuItem Header="Exit" />
+                <Custom:RibbonButton Label="Button"/>
+            </Custom:RibbonApplicationMenu>
+        </Custom:Ribbon.ApplicationMenu>
+        <Custom:RibbonTab Header="Home">
+            
+        </Custom:RibbonTab>
+    </Custom:Ribbon>
+</Custom:RibbonWindow>

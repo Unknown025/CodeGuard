@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace CodeGuard
+namespace CodeGuard_Updater
 {
     static class Program
     {
@@ -15,14 +15,7 @@ namespace CodeGuard
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (Environment.CommandLine.Contains("-officeUI"))
-            {
-                Application.Run(new CodeGuardOfficeWindow());
-            }
-            else
-            {
-                Application.Run(new MainWindow());
-            }
+            Application.Run(new UpdateWindow());
         }
     }
 }

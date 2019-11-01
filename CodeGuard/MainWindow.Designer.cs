@@ -32,23 +32,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.queueProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
             this.fileMenuItem = new System.Windows.Forms.MenuItem();
             this.openMenuItem = new System.Windows.Forms.MenuItem();
+            this.openDirectoryItem = new System.Windows.Forms.MenuItem();
             this.clearAllMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.runMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.exitMenuItem = new System.Windows.Forms.MenuItem();
             this.optionsMenuItem = new System.Windows.Forms.MenuItem();
-            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.desiredOutputItem = new System.Windows.Forms.MenuItem();
             this.viewMenuItem = new System.Windows.Forms.MenuItem();
-            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.settingsItem = new System.Windows.Forms.MenuItem();
             this.helpMenuItem = new System.Windows.Forms.MenuItem();
-            this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.viewHelpItem = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.menuItem9 = new System.Windows.Forms.MenuItem();
+            this.checkForUpdatesItem = new System.Windows.Forms.MenuItem();
+            this.aboutItem = new System.Windows.Forms.MenuItem();
             this.filesGroupBox = new System.Windows.Forms.GroupBox();
             this.filesListView = new System.Windows.Forms.ListView();
             this.filesHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -57,6 +59,7 @@
             this.optionsGroupBox = new System.Windows.Forms.GroupBox();
             this.runButton = new System.Windows.Forms.Button();
             this.desiredOutputPage = new System.Windows.Forms.TabPage();
+            this.testCaseTextBox = new System.Windows.Forms.RichTextBox();
             this.resultsPage = new System.Windows.Forms.TabPage();
             this.assignmentDetails = new System.Windows.Forms.RichTextBox();
             this.resultGridView = new System.Windows.Forms.DataGridView();
@@ -69,6 +72,7 @@
             this.tabControl.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             this.optionsGroupBox.SuspendLayout();
+            this.desiredOutputPage.SuspendLayout();
             this.resultsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGridView)).BeginInit();
             this.SuspendLayout();
@@ -76,8 +80,9 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 428);
+            this.statusLabel,
+            this.queueProgressBar});
+            this.statusStrip.Location = new System.Drawing.Point(0, 419);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(800, 22);
             this.statusStrip.TabIndex = 0;
@@ -86,8 +91,14 @@
             // statusLabel
             // 
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(39, 17);
-            this.statusLabel.Text = "Ready";
+            this.statusLabel.Size = new System.Drawing.Size(42, 17);
+            this.statusLabel.Text = "Ready.";
+            // 
+            // queueProgressBar
+            // 
+            this.queueProgressBar.Name = "queueProgressBar";
+            this.queueProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.queueProgressBar.Visible = false;
             // 
             // mainMenu
             // 
@@ -102,6 +113,7 @@
             this.fileMenuItem.Index = 0;
             this.fileMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.openMenuItem,
+            this.openDirectoryItem,
             this.clearAllMenuItem,
             this.menuItem1,
             this.runMenuItem,
@@ -112,32 +124,39 @@
             // openMenuItem
             // 
             this.openMenuItem.Index = 0;
-            this.openMenuItem.Text = "Open";
+            this.openMenuItem.Text = "Open &Java file(s)";
             this.openMenuItem.Click += new System.EventHandler(this.OpenMenuItem_Click);
+            // 
+            // openDirectoryItem
+            // 
+            this.openDirectoryItem.Index = 1;
+            this.openDirectoryItem.Text = "Open &Directory";
+            this.openDirectoryItem.Click += new System.EventHandler(this.OpenDirectoryItem_Click);
             // 
             // clearAllMenuItem
             // 
-            this.clearAllMenuItem.Index = 1;
+            this.clearAllMenuItem.Index = 2;
             this.clearAllMenuItem.Text = "Clear All";
+            this.clearAllMenuItem.Click += new System.EventHandler(this.ClearAllMenuItem_Click);
             // 
             // menuItem1
             // 
-            this.menuItem1.Index = 2;
+            this.menuItem1.Index = 3;
             this.menuItem1.Text = "-";
             // 
             // runMenuItem
             // 
-            this.runMenuItem.Index = 3;
+            this.runMenuItem.Index = 4;
             this.runMenuItem.Text = "Run Tests";
             // 
             // menuItem10
             // 
-            this.menuItem10.Index = 4;
+            this.menuItem10.Index = 5;
             this.menuItem10.Text = "-";
             // 
             // exitMenuItem
             // 
-            this.exitMenuItem.Index = 5;
+            this.exitMenuItem.Index = 6;
             this.exitMenuItem.Text = "Exit";
             this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
@@ -145,58 +164,64 @@
             // 
             this.optionsMenuItem.Index = 1;
             this.optionsMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem6});
+            this.desiredOutputItem});
             this.optionsMenuItem.Text = "&Edit";
             // 
-            // menuItem6
+            // desiredOutputItem
             // 
-            this.menuItem6.Index = 0;
-            this.menuItem6.Text = "Desired Output";
+            this.desiredOutputItem.Index = 0;
+            this.desiredOutputItem.Text = "Desired Output";
             // 
             // viewMenuItem
             // 
             this.viewMenuItem.Index = 2;
             this.viewMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem4});
+            this.settingsItem});
             this.viewMenuItem.Text = "&View";
             // 
-            // menuItem4
+            // settingsItem
             // 
-            this.menuItem4.Index = 0;
-            this.menuItem4.Text = "Settings";
+            this.settingsItem.Index = 0;
+            this.settingsItem.Text = "Settings";
+            this.settingsItem.Click += new System.EventHandler(this.SettingsItem_Click);
             // 
             // helpMenuItem
             // 
             this.helpMenuItem.Index = 3;
             this.helpMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem7,
+            this.viewHelpItem,
             this.menuItem8,
-            this.menuItem3,
-            this.menuItem9});
+            this.checkForUpdatesItem,
+            this.aboutItem});
             this.helpMenuItem.Text = "&Help";
             // 
-            // menuItem7
+            // viewHelpItem
             // 
-            this.menuItem7.Index = 0;
-            this.menuItem7.Text = "View Help";
+            this.viewHelpItem.Index = 0;
+            this.viewHelpItem.Text = "View Help";
+            this.viewHelpItem.Click += new System.EventHandler(this.ViewHelpItem_Click);
             // 
             // menuItem8
             // 
             this.menuItem8.Index = 1;
             this.menuItem8.Text = "-";
             // 
-            // menuItem3
+            // checkForUpdatesItem
             // 
-            this.menuItem3.Index = 2;
-            this.menuItem3.Text = "Check for updates";
+            this.checkForUpdatesItem.Index = 2;
+            this.checkForUpdatesItem.Text = "Check for updates";
+            this.checkForUpdatesItem.Click += new System.EventHandler(this.CheckForUpdatesItem_Click);
             // 
-            // menuItem9
+            // aboutItem
             // 
-            this.menuItem9.Index = 3;
-            this.menuItem9.Text = "About CodeGuard";
+            this.aboutItem.Index = 3;
+            this.aboutItem.Text = "About CodeGuard";
+            this.aboutItem.Click += new System.EventHandler(this.AboutItem_Click);
             // 
             // filesGroupBox
             // 
+            this.filesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.filesGroupBox.Controls.Add(this.filesListView);
             this.filesGroupBox.Location = new System.Drawing.Point(6, 6);
             this.filesGroupBox.Name = "filesGroupBox";
@@ -207,7 +232,8 @@
             // 
             // filesListView
             // 
-            this.filesListView.CheckBoxes = true;
+            this.filesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.filesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.filesHeader});
             this.filesListView.Location = new System.Drawing.Point(6, 19);
@@ -227,10 +253,11 @@
             this.tabControl.Controls.Add(this.generalTabPage);
             this.tabControl.Controls.Add(this.desiredOutputPage);
             this.tabControl.Controls.Add(this.resultsPage);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(776, 413);
+            this.tabControl.Size = new System.Drawing.Size(800, 419);
             this.tabControl.TabIndex = 1;
             // 
             // generalTabPage
@@ -240,39 +267,54 @@
             this.generalTabPage.Location = new System.Drawing.Point(4, 22);
             this.generalTabPage.Name = "generalTabPage";
             this.generalTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalTabPage.Size = new System.Drawing.Size(768, 387);
+            this.generalTabPage.Size = new System.Drawing.Size(792, 393);
             this.generalTabPage.TabIndex = 0;
             this.generalTabPage.Text = "General";
             this.generalTabPage.UseVisualStyleBackColor = true;
             // 
             // optionsGroupBox
             // 
+            this.optionsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.optionsGroupBox.Controls.Add(this.runButton);
             this.optionsGroupBox.Location = new System.Drawing.Point(283, 6);
             this.optionsGroupBox.Name = "optionsGroupBox";
-            this.optionsGroupBox.Size = new System.Drawing.Size(479, 369);
+            this.optionsGroupBox.Size = new System.Drawing.Size(501, 375);
             this.optionsGroupBox.TabIndex = 2;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Options";
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(398, 340);
+            this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.runButton.Location = new System.Drawing.Point(420, 346);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 23);
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run Tests";
             this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // desiredOutputPage
             // 
+            this.desiredOutputPage.Controls.Add(this.testCaseTextBox);
             this.desiredOutputPage.Location = new System.Drawing.Point(4, 22);
             this.desiredOutputPage.Name = "desiredOutputPage";
             this.desiredOutputPage.Padding = new System.Windows.Forms.Padding(3);
-            this.desiredOutputPage.Size = new System.Drawing.Size(768, 387);
+            this.desiredOutputPage.Size = new System.Drawing.Size(792, 393);
             this.desiredOutputPage.TabIndex = 1;
             this.desiredOutputPage.Text = "Test Case";
             this.desiredOutputPage.UseVisualStyleBackColor = true;
+            // 
+            // testCaseTextBox
+            // 
+            this.testCaseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.testCaseTextBox.Location = new System.Drawing.Point(3, 3);
+            this.testCaseTextBox.Name = "testCaseTextBox";
+            this.testCaseTextBox.Size = new System.Drawing.Size(786, 387);
+            this.testCaseTextBox.TabIndex = 0;
+            this.testCaseTextBox.Text = "";
             // 
             // resultsPage
             // 
@@ -281,20 +323,22 @@
             this.resultsPage.Location = new System.Drawing.Point(4, 22);
             this.resultsPage.Name = "resultsPage";
             this.resultsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.resultsPage.Size = new System.Drawing.Size(768, 387);
+            this.resultsPage.Size = new System.Drawing.Size(792, 393);
             this.resultsPage.TabIndex = 2;
             this.resultsPage.Text = "Results";
             this.resultsPage.UseVisualStyleBackColor = true;
             // 
             // assignmentDetails
             // 
-            this.assignmentDetails.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.assignmentDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.assignmentDetails.BackColor = System.Drawing.SystemColors.Window;
             this.assignmentDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.assignmentDetails.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.assignmentDetails.Location = new System.Drawing.Point(7, 315);
+            this.assignmentDetails.Location = new System.Drawing.Point(7, 249);
             this.assignmentDetails.Name = "assignmentDetails";
             this.assignmentDetails.ReadOnly = true;
-            this.assignmentDetails.Size = new System.Drawing.Size(755, 66);
+            this.assignmentDetails.Size = new System.Drawing.Size(777, 141);
             this.assignmentDetails.TabIndex = 1;
             this.assignmentDetails.Text = "";
             // 
@@ -304,20 +348,25 @@
             this.resultGridView.AllowUserToDeleteRows = false;
             this.resultGridView.AllowUserToResizeColumns = false;
             this.resultGridView.AllowUserToResizeRows = false;
+            this.resultGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.resultGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.resultGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.assignmentColumn,
             this.statusColumn,
             this.plagiarismColumn});
             this.resultGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.resultGridView.Location = new System.Drawing.Point(7, 7);
+            this.resultGridView.Location = new System.Drawing.Point(3, 6);
+            this.resultGridView.MultiSelect = false;
             this.resultGridView.Name = "resultGridView";
             this.resultGridView.ReadOnly = true;
             this.resultGridView.RowHeadersVisible = false;
             this.resultGridView.ShowEditingIcon = false;
             this.resultGridView.ShowRowErrors = false;
-            this.resultGridView.Size = new System.Drawing.Size(755, 301);
+            this.resultGridView.Size = new System.Drawing.Size(786, 237);
             this.resultGridView.TabIndex = 0;
+            this.resultGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGridView_CellContentClick);
             // 
             // assignmentColumn
             // 
@@ -356,7 +405,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 441);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.statusStrip);
             this.Menu = this.mainMenu;
@@ -370,6 +419,7 @@
             this.tabControl.ResumeLayout(false);
             this.generalTabPage.ResumeLayout(false);
             this.optionsGroupBox.ResumeLayout(false);
+            this.desiredOutputPage.ResumeLayout(false);
             this.resultsPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.resultGridView)).EndInit();
             this.ResumeLayout(false);
@@ -385,16 +435,16 @@
         private System.Windows.Forms.MenuItem fileMenuItem;
         private System.Windows.Forms.MenuItem optionsMenuItem;
         private System.Windows.Forms.MenuItem openMenuItem;
-        private System.Windows.Forms.MenuItem menuItem6;
+        private System.Windows.Forms.MenuItem desiredOutputItem;
         private System.Windows.Forms.MenuItem viewMenuItem;
         private System.Windows.Forms.MenuItem helpMenuItem;
-        private System.Windows.Forms.MenuItem menuItem7;
+        private System.Windows.Forms.MenuItem viewHelpItem;
         private System.Windows.Forms.MenuItem menuItem8;
-        private System.Windows.Forms.MenuItem menuItem9;
+        private System.Windows.Forms.MenuItem aboutItem;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem runMenuItem;
-        private System.Windows.Forms.MenuItem menuItem4;
-        private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.MenuItem settingsItem;
+        private System.Windows.Forms.MenuItem checkForUpdatesItem;
         private System.Windows.Forms.GroupBox filesGroupBox;
         private System.Windows.Forms.ListView filesListView;
         private System.Windows.Forms.MenuItem menuItem10;
@@ -413,6 +463,9 @@
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.MenuItem clearAllMenuItem;
         private System.Windows.Forms.RichTextBox assignmentDetails;
+        private System.Windows.Forms.ToolStripProgressBar queueProgressBar;
+        private System.Windows.Forms.MenuItem openDirectoryItem;
+        private System.Windows.Forms.RichTextBox testCaseTextBox;
     }
 }
 
